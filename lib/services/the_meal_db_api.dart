@@ -21,7 +21,7 @@ Future<List<MealCategory>> fetchMealCategories() async {
   }
 }
 
-Future<List<Meal>> featchMealsByCategory(String category) async {
+Future<List<Meal>> fetchMealsByCategory(String category) async {
   final endpoint = '${ApiEndpoint.filter}?c=$category';
   final response = await http.get(Uri.parse(endpoint));
 

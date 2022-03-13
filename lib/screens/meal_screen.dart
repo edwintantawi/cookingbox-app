@@ -19,7 +19,7 @@ class _MealsScreen extends State<MealsScreen> {
   @override
   void initState() {
     super.initState();
-    meals = featchMealsByCategory(widget.category.title);
+    meals = fetchMealsByCategory(widget.category.title);
   }
 
   @override
