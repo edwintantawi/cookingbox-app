@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:cookingbox_app/domains/meal.dart';
 import 'package:http/http.dart' as http;
+
+import 'package:cookingbox_app/domains/meal.dart';
 import 'package:cookingbox_app/domains/meal_category.dart';
 import 'package:cookingbox_app/constants/api_endpoint.dart';
 

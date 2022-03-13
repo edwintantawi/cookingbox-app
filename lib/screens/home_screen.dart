@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:cookingbox_app/screens/meal_screen.dart';
 import 'package:cookingbox_app/widgets/app_shell.dart';
-import 'package:flutter/material.dart';
 import 'package:cookingbox_app/domains/meal_category.dart';
 import 'package:cookingbox_app/services/the_meal_db_api.dart';
 
