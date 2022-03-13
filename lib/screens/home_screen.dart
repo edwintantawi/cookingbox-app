@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:cookingbox_app/screens/meal_screen.dart';
 import 'package:cookingbox_app/widgets/app_shell.dart';
@@ -52,9 +53,15 @@ class _HomeScreen extends State<HomeScreen> {
                           trailing: const Icon(Icons.arrow_right_outlined),
                           iconColor: Theme.of(context).primaryColor,
                           title: Text(snapshot.data![index].title),
-                          leading: Image.network(
-                            snapshot.data![index].image,
+                          leading: CachedNetworkImage(
+                            imageUrl: snapshot.data![index].image,
                             width: 60,
+                            progressIndicatorBuilder:
+                                (context, url, progress) => Center(
+                              child: CircularProgressIndicator(
+                                value: progress.progress,
+                              ),
+                            ),
                           ),
                           onTap: () {
                             Navigator.push(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:cookingbox_app/domains/meal.dart';
 import 'package:cookingbox_app/services/the_meal_db_api.dart';
@@ -56,11 +57,17 @@ class _MealsScreen extends State<MealsScreen> {
                         borderRadius: const BorderRadius.all(
                           Radius.circular(8),
                         ),
-                        child: Image.network(
-                          snapshot.data![index].image,
+                        child: CachedNetworkImage(
+                          imageUrl: snapshot.data![index].image,
                           height: MediaQuery.of(context).size.width / 2 / 1.5,
                           width: MediaQuery.of(context).size.width / 2,
                           fit: BoxFit.cover,
+                          progressIndicatorBuilder: (context, url, progress) =>
+                              Center(
+                            child: CircularProgressIndicator(
+                              value: progress.progress,
+                            ),
+                          ),
                         ),
                       ),
                       Container(
