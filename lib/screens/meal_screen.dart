@@ -1,8 +1,6 @@
-import 'package:cookingbox_app/constants/colors.dart';
 import 'package:cookingbox_app/domains/meal.dart';
 import 'package:cookingbox_app/services/the_meal_db_api.dart';
 import 'package:cookingbox_app/widgets/app_shell.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cookingbox_app/domains/meal_category.dart';
 
