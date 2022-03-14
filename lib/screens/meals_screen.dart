@@ -26,6 +26,20 @@ class _MealsScreen extends State<MealsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    int getGridCount() {
+      if (screenWidth < 520) {
+        return 2;
+      } else if (screenWidth < 1000) {
+        return 3;
+      } else if (screenWidth < 1200) {
+        return 4;
+      } else {
+        return 6;
+      }
+    }
+
     return AppShell(
       title: Text('${widget.category.title} meal\'s'),
       body: Center(
@@ -43,15 +57,15 @@ class _MealsScreen extends State<MealsScreen> {
                   vertical: 16,
                 ),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                  crossAxisCount: getGridCount(),
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 12,
-                  childAspectRatio: MediaQuery.of(context).size.width / 360,
                 ),
                 scrollDirection: Axis.vertical,
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Column(
+                  return Stack(
+                    clipBehavior: Clip.antiAlias,
                     children: [
                       ClipRRect(
                         borderRadius: const BorderRadius.all(
@@ -59,8 +73,7 @@ class _MealsScreen extends State<MealsScreen> {
                         ),
                         child: CachedNetworkImage(
                           imageUrl: snapshot.data![index].image,
-                          height: MediaQuery.of(context).size.width / 2 / 1.5,
-                          width: MediaQuery.of(context).size.width / 2,
+                          width: screenWidth,
                           fit: BoxFit.cover,
                           progressIndicatorBuilder: (context, url, progress) =>
                               Center(
@@ -70,18 +83,35 @@ class _MealsScreen extends State<MealsScreen> {
                           ),
                         ),
                       ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        padding: const EdgeInsets.only(top: 8, bottom: 2),
-                        child: Text(
-                          snapshot.data![index].title,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: true,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            letterSpacing: 1,
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.vertical(
+                            bottom: Radius.circular(8),
+                          ),
+                          child: Container(
+                            clipBehavior: Clip.antiAlias,
+                            alignment: Alignment.topLeft,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 12,
+                              horizontal: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            child: Text(
+                              snapshot.data![index].title,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              softWrap: true,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                letterSpacing: 1,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
                       ),
